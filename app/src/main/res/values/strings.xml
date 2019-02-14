@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CustomerOverview</string>
+    <string name="prev">Previous</string>
+    <string name="next">Next</string>
+    <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="company">Company</string>
+    <string name="email">Email</string>
+    <string name="calls">Calls</string>
+    <string name="registration">Registration</string>
+    <string name="active">Is active?</string>
 </resources>
