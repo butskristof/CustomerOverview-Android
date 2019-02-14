@@ -11,4 +11,13 @@
     <string name="active">Is active?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="about">About</string>
+    <string name="abouttext">This Android application was created as a running project for the User Interface 2 course
+        at the Karel de Grote University College. It is used throughout the course to implement and exercise acquired
+        skills. It will be continually expanded throughout the semester.
+    </string>
+    <string name="classgroup">Class group</string>
+    <string name="kb_name">Kristof Buts</string>
+    <string name="kb_email">kristof.buts@student.kdg.be</string>
+    <string name="kb_classgroup">INF201B</string>
 </resources>

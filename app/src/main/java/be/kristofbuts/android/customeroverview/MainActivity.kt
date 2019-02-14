@@ -3,6 +3,8 @@ package be.kristofbuts.android.customeroverview
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -35,6 +37,22 @@ class MainActivity : AppCompatActivity() {
         this.addEventHandlers()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item != null && item.itemId == R.id.about) {
+            // start about activity
+            val intent = Intent(applicationContext, AboutActivity::class.java)
+            startActivity(intent)
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun initialiseViews() {
         this.btnPrev = findViewById(R.id.btnPrev)
         this.btnNext = findViewById(R.id.btnNext)
@@ -65,9 +83,6 @@ class MainActivity : AppCompatActivity() {
 
         this.imgCustomer.setOnClickListener {
             // start new activity
-//            val intent = Intent(applicationContext, PingActivity::class.java)
-//            startActivity(intent)
-
             val intent = Intent(applicationContext, ImageActivity::class.java).apply {
                 putExtra("image", customers[counter].image)
             }
