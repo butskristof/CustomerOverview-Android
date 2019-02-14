@@ -1,5 +1,6 @@
 package be.kristofbuts.android.customeroverview
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -61,6 +62,17 @@ class MainActivity : AppCompatActivity() {
             this.increaseCounter()
             this.fillCustomerInfo(this.customers[counter])
         }
+
+        this.imgCustomer.setOnClickListener {
+            // start new activity
+//            val intent = Intent(applicationContext, PingActivity::class.java)
+//            startActivity(intent)
+
+            val intent = Intent(applicationContext, ImageActivity::class.java).apply {
+                putExtra("image", customers[counter].image)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun fillCustomerInfo(c: Customer) {
@@ -80,5 +92,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun decreaseCounter() {
         this.counter = (this.counter + this.customers.size - 1) % this.customers.size
+    }
+
+    private fun startImgDetail() {
+
     }
 }
