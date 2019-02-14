@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txtRegistration: TextView
     private lateinit var txtActive: TextView
 
-    private lateinit var customers: Array<Customer>
+    private lateinit var customers: ArrayList<Customer>
     private var counter: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
