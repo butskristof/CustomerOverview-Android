@@ -9,4 +9,6 @@
     <string name="calls">Calls</string>
     <string name="registration">Registration</string>
     <string name="active">Is active?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
