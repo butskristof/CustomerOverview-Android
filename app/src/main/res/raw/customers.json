@@ -1,0 +1,241 @@
+{
+  "customers": [
+    {
+      "id": 0,
+      "firstName": "Michael",
+      "lastName": "Lucas",
+      "company": "Geekus",
+      "email": "michael.lucas@geekus.biz",
+      "callsToServiceLine": 9,
+      "registrationDate": "2015-05-15",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Michael"
+    },
+    {
+      "id": 1,
+      "firstName": "Briggs",
+      "lastName": "Puckett",
+      "company": "Bicol",
+      "email": "briggs.puckett@bicol.co.uk",
+      "callsToServiceLine": 18,
+      "registrationDate": "2015-12-09",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Briggs"
+    },
+    {
+      "id": 2,
+      "firstName": "Gail",
+      "lastName": "Jarvis",
+      "company": "Qot",
+      "email": "gail.jarvis@qot.ca",
+      "callsToServiceLine": 20,
+      "registrationDate": "2015-04-01",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Gail"
+    },
+    {
+      "id": 3,
+      "firstName": "Sandra",
+      "lastName": "Abbott",
+      "company": "Emoltra",
+      "email": "sandra.abbott@emoltra.tv",
+      "callsToServiceLine": 6,
+      "registrationDate": "2017-04-16",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Sandra"
+    },
+    {
+      "id": 4,
+      "firstName": "Osborne",
+      "lastName": "Bates",
+      "company": "Rubadub",
+      "email": "osborne.bates@rubadub.org",
+      "callsToServiceLine": 0,
+      "registrationDate": "2017-12-03",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Osborne"
+    },
+    {
+      "id": 5,
+      "firstName": "Sellers",
+      "lastName": "Nash",
+      "company": "Synkgen",
+      "email": "sellers.nash@synkgen.name",
+      "callsToServiceLine": 20,
+      "registrationDate": "2018-03-07",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Sellers"
+    },
+    {
+      "id": 6,
+      "firstName": "Vang",
+      "lastName": "Conway",
+      "company": "Extragene",
+      "email": "vang.conway@extragene.io",
+      "callsToServiceLine": 15,
+      "registrationDate": "2016-07-03",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Vang"
+    },
+    {
+      "id": 7,
+      "firstName": "Jessie",
+      "lastName": "Sargent",
+      "company": "Niquent",
+      "email": "jessie.sargent@niquent.info",
+      "callsToServiceLine": 8,
+      "registrationDate": "2015-05-29",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Jessie"
+    },
+    {
+      "id": 8,
+      "firstName": "Cooley",
+      "lastName": "Edwards",
+      "company": "Zillacom",
+      "email": "cooley.edwards@zillacom.biz",
+      "callsToServiceLine": 15,
+      "registrationDate": "2014-01-21",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Cooley"
+    },
+    {
+      "id": 9,
+      "firstName": "Cunningham",
+      "lastName": "Lowe",
+      "company": "Zolarex",
+      "email": "cunningham.lowe@zolarex.com",
+      "callsToServiceLine": 7,
+      "registrationDate": "2018-07-18",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Cunningham"
+    },
+    {
+      "id": 10,
+      "firstName": "Cornelia",
+      "lastName": "Peck",
+      "company": "Tubalum",
+      "email": "cornelia.peck@tubalum.me",
+      "callsToServiceLine": 10,
+      "registrationDate": "2017-12-29",
+      "isActive": true,
+      "image": "https://via.placeholder.com/200x80.png?text=Cornelia"
+    },
+    {
+      "id": 11,
+      "firstName": "Farrell",
+      "lastName": "Ballard",
+      "company": "Kongene",
+      "email": "farrell.ballard@kongene.us",
+      "callsToServiceLine": 7,
+      "registrationDate": "2018-08-16",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Farrell"
+    },
+    {
+      "id": 12,
+      "firstName": "Carlene",
+      "lastName": "Galloway",
+      "company": "Cytrek",
+      "email": "carlene.galloway@cytrek.biz",
+      "callsToServiceLine": 17,
+      "registrationDate": "2014-07-15",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Carlene"
+    },
+    {
+      "id": 13,
+      "firstName": "Cherry",
+      "lastName": "Vaughan",
+      "company": "Corporana",
+      "email": "cherry.vaughan@corporana.co.uk",
+      "callsToServiceLine": 19,
+      "registrationDate": "2014-06-29",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Cherry"
+    },
+    {
+      "id": 14,
+      "firstName": "Baxter",
+      "lastName": "Wolfe",
+      "company": "Gaptec",
+      "email": "baxter.wolfe@gaptec.ca",
+      "callsToServiceLine": 19,
+      "registrationDate": "2015-11-18",
+      "isActive": false,
+      "image": "https://via.placeholder.com/200x80.png?text=Baxter"
+    }
+  ],
+  "orders": [
+    {
+      "id": 0,
+      "date": "2018-10-14",
+      "total": "82.63",
+      "currency": "GBP",
+      "customerId": 0
+    },
+    {
+      "id": 1,
+      "date": "2018-09-15",
+      "total": "304.17",
+      "currency": "EUR",
+      "customerId": 0
+    },
+    {
+      "id": 2,
+      "date": "2018-09-29",
+      "total": "94.69",
+      "currency": "EUR",
+      "customerId": 0
+    },
+    {
+      "id": 3,
+      "date": "2018-11-27",
+      "total": "210.7",
+      "currency": "EUR",
+      "customerId": 1
+    },
+    {
+      "id": 4,
+      "date": "2019-02-01",
+      "total": "203.37",
+      "currency": "EUR",
+      "customerId": 2
+    },
+    {
+      "id": 5,
+      "date": "2018-11-20",
+      "total": "205.21",
+      "currency": "GBP",
+      "customerId": 3
+    },
+    {
+      "id": 6,
+      "date": "2018-12-10",
+      "total": "240.76",
+      "currency": "EUR",
+      "customerId": 4
+    },
+    {
+      "id": 7,
+      "date": "2018-09-17",
+      "total": "376.54",
+      "currency": "EUR",
+      "customerId": 5
+    },
+    {
+      "id": 8,
+      "date": "2018-10-25",
+      "total": "264.91",
+      "currency": "EUR",
+      "customerId": 6
+    },
+    {
+      "id": 9,
+      "date": "2018-09-07",
+      "total": "202.4",
+      "currency": "USD",
+      "customerId": 6
+    }
+  ]
+}
