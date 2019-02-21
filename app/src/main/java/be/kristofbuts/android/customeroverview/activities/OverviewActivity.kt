@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
@@ -30,6 +32,22 @@ class OverviewActivity : AppCompatActivity(), CustomerAdapter.CustomerSelectionL
                 layoutManager = LinearLayoutManager(this@OverviewActivity)
                 adapter = CustomerAdapter(this@OverviewActivity, this@OverviewActivity)
             }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item != null && item.itemId == R.id.about) {
+            // start about activity
+            val intent = Intent(applicationContext, AboutActivity::class.java)
+            startActivity(intent)
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCustomerSelected(pos: Int) {
