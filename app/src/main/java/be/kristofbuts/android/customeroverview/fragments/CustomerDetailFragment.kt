@@ -1,6 +1,5 @@
 package be.kristofbuts.android.customeroverview.fragments
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -35,13 +34,14 @@ class CustomerDetailFragment : Fragment() {
     private lateinit var tvRegistration: TextView
     private lateinit var tvActive: TextView
 
+    // keep track of customer to show
     private var index: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment but don't return it immediately
         val view = inflater.inflate(R.layout.fragment_customer_detail, container, false)
 
         this.initialiseViews(view)
@@ -64,9 +64,10 @@ class CustomerDetailFragment : Fragment() {
     }
 
     private fun addEventHandlers() {
+        // photo should open in separate activity which should be started in the context of the containing activity
         this.ivCustomer.setOnClickListener {
-            // start new activity
             val intent = Intent(context!!.applicationContext, ImageActivity::class.java).apply {
+                // pass in img ref
                 putExtra("image", getCustomers()[index].image)
             }
             startActivity(intent)
@@ -74,12 +75,14 @@ class CustomerDetailFragment : Fragment() {
     }
 
     private fun updateFields() {
+        // get customer for easy reference below
         val customer = getCustomers()[index]
-        // check whether properties are initialised yet!!
 
-        if (this::ivCustomer.isInitialized) this.ivCustomer.setImageDrawable(getDrawable(context?.applicationContext!!, customer.image))
+        // check whether properties are initialised first!!
+
+        if (this::ivCustomer.isInitialized) ivCustomer.setImageDrawable(getDrawable(context?.applicationContext!!, customer.image))
         if (this::tvID.isInitialized) tvID.text = customer.id.toString()
-        if (this::tvName.isInitialized) tvName.text = String.format("%s %s", customer.firstName, customer.lastName)
+        if (this::tvName.isInitialized) tvName.text = customer.getName()
         if (this::tvCompany.isInitialized) tvCompany.text = customer.company
         if (this::tvEmail.isInitialized) tvEmail.text = customer.email
         if (this::tvCalls.isInitialized) tvCalls.text = customer.callsToSerivceLine.toString()
@@ -87,6 +90,7 @@ class CustomerDetailFragment : Fragment() {
         if (this::tvActive.isInitialized) tvActive.text = if (customer.isActive) getString(R.string.yes) else getString(R.string.no)
     }
 
+    // update customer to show and trigger update
     fun setCustomerIndex(custIndex: Int) {
         this.index = custIndex
         this.updateFields()

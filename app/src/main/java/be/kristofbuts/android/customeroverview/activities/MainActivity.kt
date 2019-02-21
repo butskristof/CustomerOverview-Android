@@ -23,10 +23,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//
+
         this.initialiseViews()
         this.addEventHandlers()
 
+        // when coming from overview, customer id is passed in, otherwise start at first element
         val customerIndex = intent.getIntExtra(CUSTOMER_INDEX, 0)
         this.setCounter(customerIndex)
     }
@@ -34,24 +35,31 @@ class MainActivity : AppCompatActivity() {
     private fun initialiseViews() {
         this.btnPrev = findViewById(R.id.btnPrev)
         this.btnNext = findViewById(R.id.btnNext)
-        this.customerDetailFragment = supportFragmentManager.findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
+        this.customerDetailFragment = supportFragmentManager
+            .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
         this.customerDetailFragment.setCustomerIndex(this.index)
     }
 
+    // add menu in upper left
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val result: Boolean
+
         if (item != null && item.itemId == R.id.about) {
             // start about activity
             val intent = Intent(applicationContext, AboutActivity::class.java)
             startActivity(intent)
-            return true
+
+            result = true
         } else {
-            return super.onOptionsItemSelected(item)
+            result = super.onOptionsItemSelected(item)
         }
+
+        return result
     }
 
     private fun addEventHandlers() {
@@ -67,17 +75,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun increaseCounter() {
+        // overflow back to zero
         this.index = (this.index + 1) % getCustomers().size
-        this.customerDetailFragment.setCustomerIndex(this.index)
+
+        this.triggerFragmentUpdate()
     }
 
     private fun decreaseCounter() {
+        // underflow back to array size
         this.index = (this.index + getCustomers().size - 1) % getCustomers().size
-        this.customerDetailFragment.setCustomerIndex(this.index)
+
+        this.triggerFragmentUpdate()
     }
 
     private fun setCounter(pos: Int) {
+        // TODO add check?
         this.index = pos
+
+        this.triggerFragmentUpdate()
+    }
+
+    private fun triggerFragmentUpdate() {
         this.customerDetailFragment.setCustomerIndex(this.index)
     }
 }

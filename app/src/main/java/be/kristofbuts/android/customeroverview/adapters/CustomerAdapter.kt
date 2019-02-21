@@ -12,8 +12,8 @@ import be.kristofbuts.android.customeroverview.model.getCustomers
 import kotlinx.android.synthetic.main.customer_list_item.view.*
 
 class CustomerAdapter(
-    private val ctx: Context,
-    private val customerSelectionListener: CustomerSelectionListener
+    private val ctx: Context, // for getting drawables etc
+    private val customerSelectionListener: CustomerSelectionListener // containing activity reacts to selection
 ) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
     /* Werk een specifieke Adapter klasse uit voor je RecyclerView, plaats deze in een apart package "adapters".
     Werk de nodige methodes uit in de Adapter klasse.
@@ -21,6 +21,7 @@ class CustomerAdapter(
     Zorg voor een goede optimalisatie: de ViewHolder haalt bij creatie de verschillende referenties naar de
     componenten op via findViewById! */
 
+    // optimisation: get components ready on construction
     class CustomerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ivCustomerPhoto: ImageView = view.ivCustomerPhoto
         val tvCustomerName: TextView = view.tvCustomerName
@@ -28,25 +29,34 @@ class CustomerAdapter(
         val tvCustomerEmail: TextView = view.tvCustomerEmail
     }
 
+    // create new list item by inflating it from the layout file
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
-        val customerView = LayoutInflater.from(parent.context).inflate(R.layout.customer_list_item, parent, false)
+        val customerView = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.customer_list_item, parent, false)
+
         return CustomerViewHolder(customerView)
     }
 
     override fun getItemCount(): Int = getCustomers().size
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
+        // get customer out of top level fn for easy reference below
         val customer = getCustomers()[position]
-        holder.ivCustomerPhoto.setImageDrawable(ctx.getDrawable(customer.image))
-        holder.tvCustomerName.text = String.format("%s %s", customer.firstName, customer.lastName)
+
+        // no need to find the components again, they're already in the viewholder since its construction
+        holder.ivCustomerPhoto.setImageDrawable(ctx.getDrawable(customer.image)) // get drawables from context
+        holder.tvCustomerName.text = customer.getName()
         holder.tvCustomerEmail.text = customer.email
         holder.tvCustomerCalls.text = String.format("%d calls to service line", customer.callsToSerivceLine)
 
+        // couple the trigger of clicking on an item to the passed in listener (should be the containing activity)
         holder.itemView.setOnClickListener {
             customerSelectionListener.onCustomerSelected(position)
         }
     }
 
+    // specify interface for listening to selection events
     interface CustomerSelectionListener {
         fun onCustomerSelected(pos: Int)
     }

@@ -12,4 +12,8 @@ data class Customer(
     val registrationDate: GregorianCalendar,
     val isActive: Boolean,
     val image: Int
-)
+) {
+    fun getName(): String {
+        return String.format("%s %s", this.firstName, this.lastName)
+    }
+}

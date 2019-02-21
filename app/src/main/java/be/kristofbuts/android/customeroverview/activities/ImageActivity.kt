@@ -23,7 +23,7 @@ class ImageActivity : AppCompatActivity() {
     }
 
     private fun addEventHandlers() {
-
+        // nothing to do here (yet)
     }
 
     private fun setImage(image: Int) {

@@ -23,5 +23,4 @@ class CustomersFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_customers, container, false)
     }
 
-
 }

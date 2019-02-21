@@ -14,7 +14,9 @@ import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
 
 const val CUSTOMER_INDEX: String = "CUSTOMER_INDEX"
 
-class OverviewActivity : AppCompatActivity(), CustomerAdapter.CustomerSelectionListener {
+class OverviewActivity :
+    AppCompatActivity(),
+    CustomerAdapter.CustomerSelectionListener {
 
     private lateinit var rvCustomers: RecyclerView
 
@@ -29,11 +31,13 @@ class OverviewActivity : AppCompatActivity(), CustomerAdapter.CustomerSelectionL
         this.rvCustomers = findViewById(R.id.rvCustomers)
         this.rvCustomers
             .apply {
-                layoutManager = LinearLayoutManager(this@OverviewActivity)
+                layoutManager = LinearLayoutManager(this@OverviewActivity) // ctx is current activity
+                // adapter requires context and listener
                 adapter = CustomerAdapter(this@OverviewActivity, this@OverviewActivity)
             }
     }
 
+    // add menu in upper left
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
@@ -59,14 +63,19 @@ class OverviewActivity : AppCompatActivity(), CustomerAdapter.CustomerSelectionL
         getoond moeten worden: je krijgt links de lijst met items, en rechts de detail-informatie van het item.
         Maak gebruik van Fragments om dit te realiseren.
          */
+
         val orientation = resources.configuration.orientation
+
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // move to new activity and pass in index
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra(CUSTOMER_INDEX, pos)
             startActivity(intent)
         } else {
+            // get fragment and update to new customer
             val fragment = supportFragmentManager
                 .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
+            // this triggers the update
             fragment.setCustomerIndex(pos)
         }
     }
