@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent" android:id="@+id/divider">
+
+    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                android:id="@+id/guideline" app:layout_constraintGuide_percent="0.4"
+                                                android:orientation="vertical"/>
+    <fragment
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:name="be.kristofbuts.android.customeroverview.fragments.CustomersFragment"
+            android:id="@+id/customerOverviewFragment"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <fragment
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:name="be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment"
+            android:id="@+id/customerDetailFragment"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/customerOverviewFragment"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

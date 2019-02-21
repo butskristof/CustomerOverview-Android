@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import be.kristofbuts.android.customeroverview.R
+import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
 import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
 import java.text.SimpleDateFormat
@@ -16,29 +17,25 @@ import java.text.SimpleDateFormat
 class MainActivity : AppCompatActivity() {
     private lateinit var btnPrev: Button
     private lateinit var btnNext: Button
-    private lateinit var imgCustomer: ImageView
-    private lateinit var txtID: TextView
-    private lateinit var txtName: TextView
-    private lateinit var txtCompany: TextView
-    private lateinit var txtEmail: TextView
-    private lateinit var txtCalls: TextView
-    private lateinit var txtRegistration: TextView
-    private lateinit var txtActive: TextView
-
-    private lateinit var customers: ArrayList<Customer>
-    private var counter: Int = 0
+    private lateinit var customerDetailFragment: CustomerDetailFragment
+    private var index: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        this.customers = getCustomers()
-
+//
         this.initialiseViews()
         this.addEventHandlers()
 
         val customerIndex = intent.getIntExtra(CUSTOMER_INDEX, 0)
         this.setCounter(customerIndex)
+    }
+
+    private fun initialiseViews() {
+        this.btnPrev = findViewById(R.id.btnPrev)
+        this.btnNext = findViewById(R.id.btnNext)
+        this.customerDetailFragment = supportFragmentManager.findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
+        this.customerDetailFragment.setCustomerIndex(this.index)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,22 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initialiseViews() {
-        this.btnPrev = findViewById(R.id.btnPrev)
-        this.btnNext = findViewById(R.id.btnNext)
-
-        this.imgCustomer = findViewById(R.id.imgCustomer)
-        this.txtID = findViewById(R.id.txtId)
-        this.txtName = findViewById(R.id.txtName)
-        this.txtCompany = findViewById(R.id.txtCompany)
-        this.txtEmail = findViewById(R.id.txtEmail)
-        this.txtCalls = findViewById(R.id.txtCalls)
-        this.txtRegistration = findViewById(R.id.txtRegistration)
-        this.txtActive = findViewById(R.id.txtActive)
-
-        this.fillCustomerInfo(this.customers[counter])
-    }
-
     private fun addEventHandlers() {
         // add btn events
         this.btnPrev.setOnClickListener {
@@ -83,45 +64,20 @@ class MainActivity : AppCompatActivity() {
             this.increaseCounter()
         }
 
-        this.imgCustomer.setOnClickListener {
-            // start new activity
-            val intent = Intent(applicationContext, ImageActivity::class.java).apply {
-                putExtra("image", customers[counter].image)
-            }
-            startActivity(intent)
-        }
-    }
-
-    private fun fillCustomerInfo(c: Customer) {
-        this.imgCustomer.setImageDrawable(getDrawable(c.image))
-        this.txtID.text = c.id.toString()
-        this.txtName.text = String.format("%s %s", c.firstName, c.lastName)
-        this.txtCompany.text = c.company
-        this.txtEmail.text = c.email
-        this.txtCalls.text = c.callsToSerivceLine.toString()
-        this.txtRegistration.text = SimpleDateFormat("yyyy-MM-dd").format(c.registrationDate.time)
-//        this.txtRegistration.text = c.registrationDate.time.toString()
-        this.txtActive.text = if (c.isActive) getString(R.string.yes) else getString(
-            R.string.no
-        )
     }
 
     private fun increaseCounter() {
-        this.counter = (this.counter + 1) % this.customers.size
-        this.fillCustomerInfo(this.customers[counter])
+        this.index = (this.index + 1) % getCustomers().size
+        this.customerDetailFragment.setCustomerIndex(this.index)
     }
 
     private fun decreaseCounter() {
-        this.counter = (this.counter + this.customers.size - 1) % this.customers.size
-        this.fillCustomerInfo(this.customers[counter])
+        this.index = (this.index + getCustomers().size - 1) % getCustomers().size
+        this.customerDetailFragment.setCustomerIndex(this.index)
     }
 
     private fun setCounter(pos: Int) {
-        this.counter = pos
-        this.fillCustomerInfo(this.customers[counter])
-    }
-
-    private fun startImgDetail() {
-
+        this.index = pos
+        this.customerDetailFragment.setCustomerIndex(this.index)
     }
 }

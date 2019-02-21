@@ -1,12 +1,14 @@
 package be.kristofbuts.android.customeroverview.activities
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.adapters.CustomerAdapter
+import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
 
 const val CUSTOMER_INDEX: String = "CUSTOMER_INDEX"
 
@@ -39,9 +41,16 @@ class OverviewActivity : AppCompatActivity(), CustomerAdapter.CustomerSelectionL
         getoond moeten worden: je krijgt links de lijst met items, en rechts de detail-informatie van het item.
         Maak gebruik van Fragments om dit te realiseren.
          */
-
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(CUSTOMER_INDEX, pos)
-        startActivity(intent)
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(CUSTOMER_INDEX, pos)
+            startActivity(intent)
+        } else {
+            val fragment = supportFragmentManager
+                .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
+            fragment.setCustomerIndex(pos)
+        }
     }
+
 }
