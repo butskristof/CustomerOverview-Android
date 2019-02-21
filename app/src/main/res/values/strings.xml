@@ -20,4 +20,8 @@
     <string name="kb_name">Kristof Buts</string>
     <string name="kb_email">kristof.buts@student.kdg.be</string>
     <string name="kb_classgroup">INF201B</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_of_calls">5 calls to service line</string>
 </resources>

@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         this.initialiseViews()
         this.addEventHandlers()
+
+        val customerIndex = intent.getIntExtra(CUSTOMER_INDEX, 0)
+        this.setCounter(customerIndex)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,12 +77,10 @@ class MainActivity : AppCompatActivity() {
         // add btn events
         this.btnPrev.setOnClickListener {
             this.decreaseCounter()
-            this.fillCustomerInfo(this.customers[counter])
         }
 
         this.btnNext.setOnClickListener {
             this.increaseCounter()
-            this.fillCustomerInfo(this.customers[counter])
         }
 
         this.imgCustomer.setOnClickListener {
@@ -107,10 +108,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun increaseCounter() {
         this.counter = (this.counter + 1) % this.customers.size
+        this.fillCustomerInfo(this.customers[counter])
     }
 
     private fun decreaseCounter() {
         this.counter = (this.counter + this.customers.size - 1) % this.customers.size
+        this.fillCustomerInfo(this.customers[counter])
+    }
+
+    private fun setCounter(pos: Int) {
+        this.counter = pos
+        this.fillCustomerInfo(this.customers[counter])
     }
 
     private fun startImgDetail() {
