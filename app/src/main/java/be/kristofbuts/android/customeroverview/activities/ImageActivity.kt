@@ -1,8 +1,9 @@
-package be.kristofbuts.android.customeroverview
+package be.kristofbuts.android.customeroverview.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import be.kristofbuts.android.customeroverview.R
 
 class ImageActivity : AppCompatActivity() {
 

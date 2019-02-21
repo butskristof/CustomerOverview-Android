@@ -1,4 +1,4 @@
-package be.kristofbuts.android.customeroverview
+package be.kristofbuts.android.customeroverview.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
 import java.text.SimpleDateFormat
@@ -97,8 +98,11 @@ class MainActivity : AppCompatActivity() {
         this.txtCompany.text = c.company
         this.txtEmail.text = c.email
         this.txtCalls.text = c.callsToSerivceLine.toString()
-        this.txtRegistration.text = SimpleDateFormat("yyyy-MM-dd").format(c.registrationDate)
-        this.txtActive.text = if (c.isActive) getString(R.string.yes) else getString(R.string.no)
+        this.txtRegistration.text = SimpleDateFormat("yyyy-MM-dd").format(c.registrationDate.time)
+//        this.txtRegistration.text = c.registrationDate.time.toString()
+        this.txtActive.text = if (c.isActive) getString(R.string.yes) else getString(
+            R.string.no
+        )
     }
 
     private fun increaseCounter() {
