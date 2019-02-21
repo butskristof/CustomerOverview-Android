@@ -9,7 +9,7 @@ data class Customer(
     val company: String,
     val email: String,
     val callsToSerivceLine: Int,
-    val registrationDate: Date,
+    val registrationDate: GregorianCalendar,
     val isActive: Boolean,
     val image: Int
 )
