@@ -8,10 +8,10 @@ data class Customer(
     val lastName: String,
     val company: String,
     val email: String,
-    val callsToSerivceLine: Int,
+    val callsToServiceLine: Int,
     val registrationDate: GregorianCalendar,
-    val isActive: Boolean,
-    val image: Int
+    val isActive: Boolean
+//    val image: String
 ) {
     fun getName(): String {
         return String.format("%s %s", this.firstName, this.lastName)

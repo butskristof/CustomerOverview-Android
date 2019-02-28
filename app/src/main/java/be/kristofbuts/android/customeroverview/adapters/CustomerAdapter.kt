@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
+import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
 import kotlinx.android.synthetic.main.customer_list_item.view.*
 
@@ -29,6 +30,12 @@ class CustomerAdapter(
         val tvCustomerEmail: TextView = view.tvCustomerEmail
     }
 
+    var customers: Array<Customer> = arrayOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     // create new list item by inflating it from the layout file
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
         val customerView = LayoutInflater
@@ -38,17 +45,17 @@ class CustomerAdapter(
         return CustomerViewHolder(customerView)
     }
 
-    override fun getItemCount(): Int = getCustomers().size
+    override fun getItemCount(): Int = customers.size
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
         // get customer out of top level fn for easy reference below
-        val customer = getCustomers()[position]
+        val customer = customers[position]
 
         // no need to find the components again, they're already in the viewholder since its construction
-        holder.ivCustomerPhoto.setImageDrawable(ctx.getDrawable(customer.image)) // get drawables from context
+//        holder.ivCustomerPhoto.setImageDrawable(ctx.getDrawable(customer.image)) // get drawables from context
         holder.tvCustomerName.text = customer.getName()
         holder.tvCustomerEmail.text = customer.email
-        holder.tvCustomerCalls.text = String.format("%d calls to service line", customer.callsToSerivceLine)
+        holder.tvCustomerCalls.text = String.format("%d calls to service line", customer.callsToServiceLine)
 
         // couple the trigger of clicking on an item to the passed in listener (should be the containing activity)
         holder.itemView.setOnClickListener {

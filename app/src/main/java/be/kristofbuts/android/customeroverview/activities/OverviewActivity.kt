@@ -4,13 +4,18 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.adapters.CustomerAdapter
 import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
+import be.kristofbuts.android.customeroverview.rest.RestClient
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 const val CUSTOMER_INDEX: String = "CUSTOMER_INDEX"
 
@@ -25,6 +30,7 @@ class OverviewActivity :
         setContentView(R.layout.activity_overview)
 
         this.initialiseViews()
+
     }
 
     private fun initialiseViews() {
@@ -35,6 +41,20 @@ class OverviewActivity :
                 // adapter requires context and listener
                 adapter = CustomerAdapter(this@OverviewActivity, this@OverviewActivity)
             }
+
+        RestClient(this)
+            .getCustomers()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                (rvCustomers.adapter as CustomerAdapter).customers = it
+            }, {
+                Toast.makeText(
+                    this@OverviewActivity,
+                    it.message,
+                    Toast.LENGTH_LONG)
+                    .show()
+            })
     }
 
     // add menu in upper left

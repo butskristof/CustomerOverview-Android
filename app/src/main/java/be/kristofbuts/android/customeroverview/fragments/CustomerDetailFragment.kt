@@ -68,7 +68,7 @@ class CustomerDetailFragment : Fragment() {
         this.ivCustomer.setOnClickListener {
             val intent = Intent(context!!.applicationContext, ImageActivity::class.java).apply {
                 // pass in img ref
-                putExtra("image", getCustomers()[index].image)
+//                putExtra("image", getCustomers()[index].image)
             }
             startActivity(intent)
         }
@@ -80,12 +80,12 @@ class CustomerDetailFragment : Fragment() {
 
         // check whether properties are initialised first!!
 
-        if (this::ivCustomer.isInitialized) ivCustomer.setImageDrawable(getDrawable(context?.applicationContext!!, customer.image))
+//        if (this::ivCustomer.isInitialized) ivCustomer.setImageDrawable(getDrawable(context?.applicationContext!!, customer.image))
         if (this::tvID.isInitialized) tvID.text = customer.id.toString()
         if (this::tvName.isInitialized) tvName.text = customer.getName()
         if (this::tvCompany.isInitialized) tvCompany.text = customer.company
         if (this::tvEmail.isInitialized) tvEmail.text = customer.email
-        if (this::tvCalls.isInitialized) tvCalls.text = customer.callsToSerivceLine.toString()
+        if (this::tvCalls.isInitialized) tvCalls.text = customer.callsToServiceLine.toString()
         if (this::tvRegistration.isInitialized) tvRegistration.text = SimpleDateFormat("yyyy-MM-dd").format(customer.registrationDate.time)
         if (this::tvActive.isInitialized) tvActive.text = if (customer.isActive) getString(R.string.yes) else getString(R.string.no)
     }
