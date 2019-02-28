@@ -53,6 +53,7 @@ class CustomerAdapter(
 
         // no need to find the components again, they're already in the viewholder since its construction
 //        holder.ivCustomerPhoto.setImageDrawable(ctx.getDrawable(customer.image)) // get drawables from context
+        holder.ivCustomerPhoto.setImageBitmap(customer.imageBitmap)
         holder.tvCustomerName.text = customer.getName()
         holder.tvCustomerEmail.text = customer.email
         holder.tvCustomerCalls.text = String.format("%d calls to service line", customer.callsToServiceLine)

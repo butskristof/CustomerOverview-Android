@@ -1,6 +1,7 @@
 package be.kristofbuts.android.customeroverview.rest
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.util.Log
 import be.kristofbuts.android.customeroverview.model.Customer
@@ -50,8 +51,7 @@ class RestClient(
                 var connection = connect("${BASE_URL}/customers")
 
                 val gson = GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd")
-                    .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser())
+                    .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
                     .create()
 
                 val customers = gson
@@ -61,6 +61,10 @@ class RestClient(
                     )
 
                 // load pictures
+                customers.forEach {
+                    connection = connect("${BASE_URL}/${it.image}")
+                    it.imageBitmap = BitmapFactory.decodeStream(connection.inputStream)
+                }
 
                 emitter.onNext(customers)
             } catch (e: IOException) {

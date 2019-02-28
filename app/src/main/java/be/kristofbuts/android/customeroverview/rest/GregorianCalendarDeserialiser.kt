@@ -16,12 +16,12 @@ class GregorianCalendarDeserialiser: JsonDeserializer<GregorianCalendar> {
         context: JsonDeserializationContext?
     ): GregorianCalendar {
 
-        val date: String = json!!.asString
+        val dateStr: String = json!!.asString
 
-        val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
         try {
-            val date: Date = formatter.parse(date)
+            val date: Date = formatter.parse(dateStr)
             val ret: GregorianCalendar = GregorianCalendar()
             ret.time = date
 

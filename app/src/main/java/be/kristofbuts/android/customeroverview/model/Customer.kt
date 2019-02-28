@@ -1,5 +1,6 @@
 package be.kristofbuts.android.customeroverview.model
 
+import android.graphics.Bitmap
 import java.util.*
 
 data class Customer(
@@ -10,8 +11,9 @@ data class Customer(
     val email: String,
     val callsToServiceLine: Int,
     val registrationDate: GregorianCalendar,
-    val isActive: Boolean
-//    val image: String
+    val isActive: Boolean,
+    val image: String,
+    var imageBitmap: Bitmap
 ) {
     fun getName(): String {
         return String.format("%s %s", this.firstName, this.lastName)
