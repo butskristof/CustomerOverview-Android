@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 
 import be.kristofbuts.android.customeroverview.R
+import be.kristofbuts.android.customeroverview.activities.CUSTOMER_INDEX
 import be.kristofbuts.android.customeroverview.activities.ImageActivity
 import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
@@ -36,6 +37,11 @@ class CustomerDetailFragment : Fragment() {
 
     // keep track of customer to show
     private var index: Int = 0
+    var customers: Array<Customer> = arrayOf()
+        set(value) {
+            field = value
+            updateFields()
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +51,6 @@ class CustomerDetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_customer_detail, container, false)
 
         this.initialiseViews(view)
-        this.updateFields()
         this.addEventHandlers()
 
         return view
@@ -69,6 +74,7 @@ class CustomerDetailFragment : Fragment() {
             val intent = Intent(context!!.applicationContext, ImageActivity::class.java).apply {
                 // pass in img ref
 //                putExtra("image", getCustomers()[index].image)
+                putExtra(CUSTOMER_INDEX, index)
             }
             startActivity(intent)
         }
@@ -76,11 +82,12 @@ class CustomerDetailFragment : Fragment() {
 
     private fun updateFields() {
         // get customer for easy reference below
-        val customer = getCustomers()[index]
+//        val customer = getCustomers()[index]
+        val customer = customers[index]
 
         // check whether properties are initialised first!!
 
-//        if (this::ivCustomer.isInitialized) ivCustomer.setImageDrawable(getDrawable(context?.applicationContext!!, customer.image))
+        if (this::ivCustomer.isInitialized) ivCustomer.setImageBitmap(customer.imageBitmap)
         if (this::tvID.isInitialized) tvID.text = customer.id.toString()
         if (this::tvName.isInitialized) tvName.text = customer.getName()
         if (this::tvCompany.isInitialized) tvCompany.text = customer.company

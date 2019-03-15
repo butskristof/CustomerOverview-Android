@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.adapters.CustomerAdapter
 import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
+import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.rest.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -24,13 +25,13 @@ class OverviewActivity :
     CustomerAdapter.CustomerSelectionListener {
 
     private lateinit var rvCustomers: RecyclerView
+//    private lateinit var customers: Array<Customer>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
 
         this.initialiseViews()
-
     }
 
     private fun initialiseViews() {
