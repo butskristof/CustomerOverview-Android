@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.model.Customer
-import be.kristofbuts.android.customeroverview.model.getCustomers
 import kotlinx.android.synthetic.main.customer_list_item.view.*
 
 class CustomerAdapter(

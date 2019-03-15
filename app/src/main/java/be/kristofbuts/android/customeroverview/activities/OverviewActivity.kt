@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -23,9 +22,14 @@ const val CUSTOMER_INDEX: String = "CUSTOMER_INDEX"
 class OverviewActivity :
     AppCompatActivity(),
     CustomerAdapter.CustomerSelectionListener {
+    private var landscapeFragment: CustomerDetailFragment? = null
 
     private lateinit var rvCustomers: RecyclerView
-//    private lateinit var customers: Array<Customer>
+    private var customers: Array<Customer> = arrayOf()
+        set(value) {
+            landscapeFragment?.customers = value
+            field = value
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +47,18 @@ class OverviewActivity :
                 adapter = CustomerAdapter(this@OverviewActivity, this@OverviewActivity)
             }
 
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            this.landscapeFragment = supportFragmentManager
+                .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
+        }
+
         RestClient(this)
             .getCustomers()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
                 (rvCustomers.adapter as CustomerAdapter).customers = it
+                customers = it
             }, {
                 Toast.makeText(
                     this@OverviewActivity,
@@ -93,11 +103,8 @@ class OverviewActivity :
             intent.putExtra(CUSTOMER_INDEX, pos)
             startActivity(intent)
         } else {
-            // get fragment and update to new customer
-            val fragment = supportFragmentManager
-                .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
             // this triggers the update
-            fragment.setCustomerIndex(pos)
+            this.landscapeFragment?.setCustomerIndex(pos)
         }
     }
 

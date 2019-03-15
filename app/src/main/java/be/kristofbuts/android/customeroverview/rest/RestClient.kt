@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.util.Log
 import be.kristofbuts.android.customeroverview.model.Customer
+import be.kristofbuts.android.customeroverview.model.Order
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import java.io.IOException
@@ -67,6 +68,31 @@ class RestClient(
                 }
 
                 emitter.onNext(customers)
+            } catch (e: IOException) {
+                Log.i("Exception", e.message)
+                emitter.onError(e)
+            }
+        }
+
+        return observable
+    }
+
+    fun getOrders(): Observable<Array<Order>> {
+        val observable = Observable.create<Array<Order>> { emitter ->
+            try {
+                var connection = connect("${BASE_URL}/orders")
+
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
+                    .create()
+
+                val orders = gson
+                    .fromJson(InputStreamReader(
+                        connection.inputStream),
+                        Array<Order>::class.java
+                    )
+
+                emitter.onNext(orders)
             } catch (e: IOException) {
                 Log.i("Exception", e.message)
                 emitter.onError(e)

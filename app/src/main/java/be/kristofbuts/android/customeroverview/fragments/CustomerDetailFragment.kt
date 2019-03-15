@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.activities.CUSTOMER_INDEX
 import be.kristofbuts.android.customeroverview.activities.ImageActivity
+import be.kristofbuts.android.customeroverview.activities.OrderActivity
 import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
 import kotlinx.android.synthetic.main.fragment_customer_detail.view.*
@@ -34,6 +35,8 @@ class CustomerDetailFragment : Fragment() {
     private lateinit var tvCalls: TextView
     private lateinit var tvRegistration: TextView
     private lateinit var tvActive: TextView
+
+    private lateinit var btnOrders: Button
 
     // keep track of customer to show
     private var index: Int = 0
@@ -66,6 +69,7 @@ class CustomerDetailFragment : Fragment() {
         this.tvCalls = view.txtCalls
         this.tvRegistration = view.txtRegistration
         this.tvActive = view.txtActive
+        this.btnOrders = view.btnOrders
     }
 
     private fun addEventHandlers() {
@@ -73,7 +77,13 @@ class CustomerDetailFragment : Fragment() {
         this.ivCustomer.setOnClickListener {
             val intent = Intent(context!!.applicationContext, ImageActivity::class.java).apply {
                 // pass in img ref
-//                putExtra("image", getCustomers()[index].image)
+                putExtra(CUSTOMER_INDEX, index)
+            }
+            startActivity(intent)
+        }
+
+        this.btnOrders.setOnClickListener {
+            val intent = Intent(context!!.applicationContext, OrderActivity::class.java).apply {
                 putExtra(CUSTOMER_INDEX, index)
             }
             startActivity(intent)
@@ -82,7 +92,6 @@ class CustomerDetailFragment : Fragment() {
 
     private fun updateFields() {
         // get customer for easy reference below
-//        val customer = getCustomers()[index]
         val customer = customers[index]
 
         // check whether properties are initialised first!!

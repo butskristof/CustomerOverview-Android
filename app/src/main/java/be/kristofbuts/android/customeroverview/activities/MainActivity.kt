@@ -6,30 +6,24 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import be.kristofbuts.android.customeroverview.R
-import be.kristofbuts.android.customeroverview.adapters.CustomerAdapter
 import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
 import be.kristofbuts.android.customeroverview.model.Customer
-import be.kristofbuts.android.customeroverview.model.getCustomers
 import be.kristofbuts.android.customeroverview.rest.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_customers.*
-import java.text.SimpleDateFormat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnPrev: Button
     private lateinit var btnNext: Button
     private lateinit var customerDetailFragment: CustomerDetailFragment
+
     private var index: Int = 0
     var customers: Array<Customer> = arrayOf()
         set(value) {
             field = value
             customerDetailFragment.customers = value
-//            triggerFragmentUpdate()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .subscribe({
                 customers = it
+
                 // when coming from overview, customer id is passed in, otherwise start at first element
                 val customerIndex = intent.getIntExtra(CUSTOMER_INDEX, 0)
                 this.setCounter(customerIndex)
@@ -66,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         this.btnNext = findViewById(R.id.btnNext)
         this.customerDetailFragment = supportFragmentManager
             .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
-//        this.customerDetailFragment.setCustomerIndex(this.index)
     }
 
     // add menu in upper left

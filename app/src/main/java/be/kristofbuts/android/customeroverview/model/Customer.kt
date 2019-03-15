@@ -16,7 +16,7 @@ data class Customer (
     val isActive: Boolean,
     val image: String,
     var imageBitmap: Bitmap
-) : Serializable {
+) {
     fun getName(): String {
         return String.format("%s %s", this.firstName, this.lastName)
     }

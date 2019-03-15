@@ -27,6 +27,9 @@ class ImageActivity : AppCompatActivity() {
         this.initialiseViews()
         this.addEventHandlers()
 
+        // when coming from overview, customer id is passed in, otherwise start at first element
+        index = intent.getIntExtra(CUSTOMER_INDEX, 0)
+
         this.loadData()
     }
 
@@ -44,9 +47,6 @@ class ImageActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
-                // when coming from overview, customer id is passed in, otherwise start at first element
-                index = intent.getIntExtra(CUSTOMER_INDEX, 0)
-
                 customers = it
             }, {
                 Toast.makeText(
