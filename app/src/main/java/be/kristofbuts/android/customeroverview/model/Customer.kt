@@ -1,8 +1,6 @@
 package be.kristofbuts.android.customeroverview.model
 
 import android.graphics.Bitmap
-import android.os.Parcelable
-import java.io.Serializable
 import java.util.*
 
 data class Customer (
@@ -17,6 +15,9 @@ data class Customer (
     val image: String,
     var imageBitmap: Bitmap
 ) {
+    /**
+     *  Uniformly get the customer's full name
+     */
     fun getName(): String {
         return String.format("%s %s", this.firstName, this.lastName)
     }

@@ -9,6 +9,9 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Utility class to convert the JSON dates to GregorianCalender (which we use in the Customer class).
+ */
 class GregorianCalendarDeserialiser: JsonDeserializer<GregorianCalendar> {
     override fun deserialize(
         json: JsonElement?,

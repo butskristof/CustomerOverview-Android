@@ -1,32 +1,47 @@
 <resources>
+
     <string name="app_name">CustomerOverview</string>
-    <string name="prev">Previous</string>
-    <string name="next">Next</string>
-    <string name="id">ID</string>
+
+    <!-- common -->
     <string name="name">Name</string>
-    <string name="company">Company</string>
     <string name="email">Email</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="id">ID</string>
+    <string name="company">Company</string>
     <string name="calls">Calls</string>
     <string name="registration">Registration</string>
     <string name="active">Is active?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="about">About</string>
-    <string name="abouttext">This Android application was created as a running project for the User Interface 2 course
+
+    <!-- about -->
+    <string name="about_title">About</string>
+    <string name="about_text">This Android application was created as a running project for the User Interface 2 course
         at the Karel de Grote University College. It is used throughout the course to implement and exercise acquired
         skills. It will be continually expanded throughout the semester.
     </string>
-    <string name="classgroup">Class group</string>
-    <string name="kb_name">Kristof Buts</string>
-    <string name="kb_email">kristof.buts@student.kdg.be</string>
-    <string name="kb_classgroup">INF201B</string>
+    <string name="about_classgroup">Class group</string>
+    <string name="about_kb_name">Kristof Buts</string>
+    <string name="about_kb_email">kristof.buts@student.kdg.be</string>
+    <string name="about_kb_classgroup">INF201B</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_of_calls">5 calls to service line</string>
+    <!-- customer detail -->
+    <string name="no_of_calls"> calls to service line</string>
+    <string name="no_of_calls_example">5 calls to service line</string>
+
+    <!-- main -->
+    <string name="prev">Previous</string>
+    <string name="next">Next</string>
+
+    <!-- order -->
     <string name="orders">Orders</string>
     <string name="order">Order</string>
     <string name="date">Date</string>
     <string name="total">Total</string>
     <string name="currency">Currency</string>
+
+    <!-- intent keys -->
+    <string name="CUSTOMER_INDEX">CUSTOMER_INDEX</string>
+    <string name="CUSTOMER_IMG_URL">CUSTOMER_IMG_URL</string>
+    <string name="CUSTOMER_NAME">CUSTOMER_NAME</string>
 </resources>

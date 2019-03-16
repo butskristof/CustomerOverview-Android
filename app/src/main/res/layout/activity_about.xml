@@ -12,14 +12,14 @@
                                               tools:layout_editor_absoluteX="411dp"
                                               app:constraint_referenced_ids="lblName,lblEmail,lblClassGroup"/>
     <TextView
-            android:text="@string/about"
+            android:text="@string/about_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lblTitle" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:textAppearance="@android:style/TextAppearance.Material.Large"/>
     <TextView
-            android:text="@string/abouttext"
+            android:text="@string/about_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/lblIntro"
@@ -34,7 +34,7 @@
             android:id="@+id/txtName" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/lblIntro" android:enabled="false" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/barrier3" android:text="@string/kb_name"/>
+            app:layout_constraintStart_toEndOf="@+id/barrier3" android:text="@string/about_kb_name"/>
     <TextView
             android:text="@string/name"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/txtName" android:enabled="false"
             app:layout_constraintStart_toEndOf="@+id/barrier3" android:layout_marginStart="8dp"
-            android:text="@string/kb_email"/>
+            android:text="@string/about_kb_email"/>
     <TextView
             android:text="@string/email"
             android:layout_width="wrap_content"
@@ -66,9 +66,9 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/txtEmail" android:enabled="false"
             app:layout_constraintStart_toEndOf="@+id/barrier3" android:layout_marginStart="8dp"
-            android:text="@string/kb_classgroup"/>
+            android:text="@string/about_kb_classgroup"/>
     <TextView
-            android:text="@string/classgroup"
+            android:text="@string/about_classgroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lblClassGroup" app:layout_constraintStart_toStartOf="parent"

@@ -20,8 +20,11 @@ import java.util.*
 const val BASE_URL: String = "http://192.168.1.206:3000"
 
 class RestClient(
-    private val context: Context
+    private val context: Context // necessary as we access a system service
 ) {
+    /**
+     * Get a connection going, which we can use in other methods for calling a specific endpoint
+     */
     private fun connect(urlString: String): HttpURLConnection {
 
         val connectionManager = context.getSystemService(
@@ -47,6 +50,9 @@ class RestClient(
         throw IOException("Unable to connection to network.")
     }
 
+    /**
+     * Get all customers
+     */
     fun getCustomers(): Observable<Array<Customer>> {
         val observable = Observable.create<Array<Customer>> { emitter ->
             try {
@@ -56,13 +62,14 @@ class RestClient(
                     .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
                     .create()
 
+                // convert json data to array of Customer objects
                 val customers = gson
                     .fromJson(InputStreamReader(
                         connection.inputStream),
                         Array<Customer>::class.java
                     )
 
-                // load pictures
+                // load pictures and add to objects
                 customers.forEach {
                     connection = connect("${BASE_URL}/${it.image}")
                     it.imageBitmap = BitmapFactory.decodeStream(connection.inputStream)
@@ -78,6 +85,9 @@ class RestClient(
         return observable
     }
 
+    /**
+     * Get a single customer, based on his ID
+     */
     fun getCustomer(id: Int): Observable<Customer> {
         val observable = Observable.create<Customer> {emitter ->
             try {
@@ -93,7 +103,7 @@ class RestClient(
                         Customer::class.java
                     )
 
-                // load pictures
+                // load picture
                 connection = connect("${BASE_URL}/${customer.image}")
                 customer.imageBitmap = BitmapFactory.decodeStream(connection.inputStream)
 
@@ -107,10 +117,14 @@ class RestClient(
         return observable
     }
 
+    /**
+     * Get all orders, never used since we filter on a customer
+     * May be used later in extra feature
+     */
     fun getOrders(): Observable<Array<Order>> {
         val observable = Observable.create<Array<Order>> { emitter ->
             try {
-                var connection = connect("${BASE_URL}/orders")
+                val connection = connect("${BASE_URL}/orders")
 
                 val gson = GsonBuilder()
                     .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
@@ -132,10 +146,13 @@ class RestClient(
         return observable
     }
 
+    /**
+     * Get orders for a specific user, this feature is supported by our web server so it's more efficient.
+     */
     fun getOrdersForCustomer(customerId: Int): Observable<Array<Order>> {
         val observable = Observable.create<Array<Order>> { emitter ->
             try {
-                var connection = connect("${BASE_URL}/orders?customerId=${customerId}")
+                val connection = connect("${BASE_URL}/orders?customerId=${customerId}")
 
                 val gson = GsonBuilder()
                     .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
@@ -157,10 +174,13 @@ class RestClient(
         return observable
     }
 
+    /**
+     * Get a single customer image based on a path to the file on the web server.
+     */
     fun getCustomerImage(imgStr: String): Observable<Bitmap> {
         val observable = Observable.create<Bitmap> { emitter ->
             try {
-                var connection = connect("${BASE_URL}/${imgStr}")
+                val connection = connect("${BASE_URL}/${imgStr}")
                 val imageBitmap = BitmapFactory.decodeStream(connection.inputStream)
 
                 emitter.onNext(imageBitmap)

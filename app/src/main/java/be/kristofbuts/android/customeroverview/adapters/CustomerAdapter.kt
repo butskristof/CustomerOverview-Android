@@ -11,15 +11,14 @@ import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.model.Customer
 import kotlinx.android.synthetic.main.customer_list_item.view.*
 
-class CustomerAdapter(
-    private val ctx: Context, // for getting drawables etc
-    private val customerSelectionListener: CustomerSelectionListener // containing activity reacts to selection
+/**
+ * This custom adapter will accommodate the list of customers. It contains a custom view holder and specifies an
+ * interface for classes that use it so they can react to a user selecting a record.
+ */
+class CustomerAdapter (
+    private val ctx: Context, // required to access string resources etc
+    private val customerSelectionListener: CustomerSelectionListener // is triggered when a user selects a record
 ) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
-    /* Werk een specifieke Adapter klasse uit voor je RecyclerView, plaats deze in een apart package "adapters".
-    Werk de nodige methodes uit in de Adapter klasse.
-    De ViewHolder maak je aan als inner class van de Adapter klasse.
-    Zorg voor een goede optimalisatie: de ViewHolder haalt bij creatie de verschillende referenties naar de
-    componenten op via findViewById! */
 
     // optimisation: get components ready on construction
     class CustomerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -29,10 +28,14 @@ class CustomerAdapter(
         val tvCustomerEmail: TextView = view.tvCustomerEmail
     }
 
+    /**
+     * This field contains the customer data (which is obtained through a REST call). Upon change, the list should
+     * be updated so we have a custom setter.
+     */
     var customers: Array<Customer> = arrayOf()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyDataSetChanged() // triggers UI update
         }
 
     // create new list item by inflating it from the layout file
@@ -44,20 +47,23 @@ class CustomerAdapter(
         return CustomerViewHolder(customerView)
     }
 
-    override fun getItemCount(): Int = customers.size
+    override fun getItemCount(): Int = customers.size // nice Kotlin shorthand
 
+    /**
+     * This method is called when a list item is reassigned to a new object. Here we set the UI elements to match
+     * the content of the new object.
+     */
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
-        // get customer out of top level fn for easy reference below
-        val customer = customers[position]
+        val customer = customers[position] // makes for easier referencing below
 
         // no need to find the components again, they're already in the viewholder since its construction
-//        holder.ivCustomerPhoto.setImageDrawable(ctx.getDrawable(customer.image)) // get drawables from context
         holder.ivCustomerPhoto.setImageBitmap(customer.imageBitmap)
         holder.tvCustomerName.text = customer.getName()
         holder.tvCustomerEmail.text = customer.email
-        holder.tvCustomerCalls.text = String.format("%d calls to service line", customer.callsToServiceLine)
+        holder.tvCustomerCalls.text = String.format("%d %s",
+            customer.callsToServiceLine, ctx.getString(R.string.no_of_calls))
 
-        // couple the trigger of clicking on an item to the passed in listener (should be the containing activity)
+        // the passed in listener will be called when a user selects a record
         holder.itemView.setOnClickListener {
             customerSelectionListener.onCustomerSelected(position)
         }

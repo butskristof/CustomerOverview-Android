@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import be.kristofbuts.android.customeroverview.R
 
 /**
- * A simple [Fragment] subclass.
- *
+ * This just exists to be able to use the RecyclerView as part of a landscape UI in OverviewActivity.
  */
 class CustomersFragment : Fragment() {
 

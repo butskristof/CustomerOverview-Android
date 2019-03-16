@@ -12,28 +12,29 @@ import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.adapters.CustomerAdapter
 import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
-import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.rest.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-const val CUSTOMER_INDEX: String = "CUSTOMER_INDEX"
-const val CUSTOMER_IMG_URL: String = "CUSTOMER_IMG_URL"
-const val CUSTOMER_NAME: String = "CUSTOMER_NAME"
-
+/**
+ * This is the new opening screen. It will contains a list of customers with their most vital information and a picture.
+ */
 class OverviewActivity :
     AppCompatActivity(),
     CustomerAdapter.CustomerSelectionListener {
-    private lateinit var landscapeFragment: CustomerDetailFragment
+
+    private lateinit var landscapeFragment: CustomerDetailFragment // this doesn't get initialised if we're in portrait
 
     private lateinit var rvCustomers: RecyclerView
-//    private var customers: Array<Customer> = arrayOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
 
         this.initialiseViews()
+        this.addEventHandlers()
+
+        this.loadCustomerData()
     }
 
     private fun initialiseViews() {
@@ -45,25 +46,15 @@ class OverviewActivity :
                 adapter = CustomerAdapter(this@OverviewActivity, this@OverviewActivity)
             }
 
+        // fragment is directly in this activity if user is in landscape
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             this.landscapeFragment = supportFragmentManager
                 .findFragmentById(R.id.customerDetailFragment) as CustomerDetailFragment
         }
+    }
 
-        RestClient(this)
-            .getCustomers()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                (rvCustomers.adapter as CustomerAdapter).customers = it
-//                customers = it
-            }, {
-                Toast.makeText(
-                    this@OverviewActivity,
-                    it.message,
-                    Toast.LENGTH_LONG)
-                    .show()
-            })
+    private fun addEventHandlers() {
+        // nothing to do here
     }
 
     // add menu in upper left
@@ -83,28 +74,41 @@ class OverviewActivity :
         }
     }
 
+    /**
+     * We react to a user selecting a customer in the list.
+     * Depending on the orientation we either start a new activity (MainActivity), or show the selected customer's
+     * data in the Fragment.
+     */
     override fun onCustomerSelected(pos: Int) {
-        // start intent or update fragment
-        /*
-        Wanneer een item uit de lijst geselecteerd wordt in portrait-oriëntatie verschijnt de detail-informatie
-        van dit item in een aparte Activity. Je kan hiervoor de activity uit de opdracht van vorige week hergebruiken.
-        Wanneer het toestel in landscape-oriëntatie staat, dan zou de lijst en de detail-informatie naast elkaar
-        getoond moeten worden: je krijgt links de lijst met items, en rechts de detail-informatie van het item.
-        Maak gebruik van Fragments om dit te realiseren.
-         */
-
         val orientation = resources.configuration.orientation
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // move to new activity and pass in index
+            // pass in index so the activity knows which customer to display
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra(CUSTOMER_INDEX, pos)
+            intent.putExtra(getString(R.string.CUSTOMER_INDEX), pos)
             startActivity(intent)
         } else {
-            // this triggers the update
-//            this.landscapeFragment?.setCustomerIndex(pos)
+            // setting the index will trigger an update in the fragment
             this.landscapeFragment.setCustomerIndex(pos)
         }
     }
 
+    /**
+     * This will make an asynchronous API call to get the customers' data, which we then pass on to the RecylcerView
+     */
+    private fun loadCustomerData() {
+        RestClient(this)
+            .getCustomers()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                (rvCustomers.adapter as CustomerAdapter).customers = it
+            }, {
+                Toast.makeText(
+                    this@OverviewActivity,
+                    it.message,
+                    Toast.LENGTH_LONG)
+                    .show()
+            })
+    }
 }

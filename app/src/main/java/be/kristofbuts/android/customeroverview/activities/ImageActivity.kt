@@ -8,16 +8,18 @@ import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.rest.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.customer_list_item.*
 
+/**
+ * This activity will show the customer's image in a screen-filling imageView.
+ */
 class ImageActivity : AppCompatActivity() {
 
     private lateinit var imgView: ImageView
-    private var imgUrlStr: String = ""
-    set(value) {
-        field = value
-        loadImage()
-    }
+    private var imgUrlStr: String = "" // path to user image, passed through intent
+        set(value) { // when changed, call method for loading the image
+            field = value
+            loadImage()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +28,26 @@ class ImageActivity : AppCompatActivity() {
         this.initialiseViews()
         this.addEventHandlers()
 
-        // when coming from overview, customer id is passed in, otherwise start at first element
-        imgUrlStr = intent.getStringExtra(CUSTOMER_IMG_URL)
+        // path is passed in through the intent
+        imgUrlStr = intent.getStringExtra(getString(R.string.CUSTOMER_IMG_URL))
 
+        // will call the web server to get the image
         this.loadImage()
     }
 
     private fun initialiseViews() {
+        // just the image view
         this.imgView = findViewById(R.id.imageView)
     }
 
     private fun addEventHandlers() {
-        // nothing to do here (yet)
+        // nothing to do here
     }
 
+    /**
+     * This method will call start a REST call to get just the customer's image as a Bitmap object.
+     * When returned, we'll update the image view.
+     */
     private fun loadImage() {
         RestClient(this)
             .getCustomerImage(imgUrlStr)
