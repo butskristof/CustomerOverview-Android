@@ -29,6 +29,10 @@
     <string name="no_of_calls"> calls to service line</string>
     <string name="no_of_calls_example">5 calls to service line</string>
 
+    <!-- menu -->
+    <string name="nav_all">All customers</string>
+    <string name="nav_random">Random customer</string>
+
     <!-- main -->
     <string name="prev">Previous</string>
     <string name="next">Next</string>

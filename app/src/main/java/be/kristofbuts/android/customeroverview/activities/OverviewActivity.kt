@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import be.kristofbuts.android.customeroverview.R
 import be.kristofbuts.android.customeroverview.adapters.CustomerAdapter
 import be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment
 import be.kristofbuts.android.customeroverview.rest.RestClient
+import com.google.android.material.navigation.NavigationView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -27,6 +31,8 @@ class OverviewActivity :
 
     private lateinit var rvCustomers: RecyclerView
 
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
@@ -38,6 +44,15 @@ class OverviewActivity :
     }
 
     private fun initialiseViews() {
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_menu)
+        }
+
+        this.drawerLayout = findViewById(R.id.drawer_layout)
+
         this.rvCustomers = findViewById(R.id.rvCustomers)
         this.rvCustomers
             .apply {
@@ -54,10 +69,18 @@ class OverviewActivity :
     }
 
     private fun addEventHandlers() {
-        // nothing to do here
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            menuItem.setChecked(true)
+            drawerLayout.closeDrawers()
+
+            // add code here
+
+            true
+        }
     }
 
-    // add menu in upper left
+    // add menu in upper right
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
@@ -68,6 +91,9 @@ class OverviewActivity :
             // start about activity
             val intent = Intent(applicationContext, AboutActivity::class.java)
             startActivity(intent)
+            return true
+        } else if (item?.itemId == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START)
             return true
         } else {
             return super.onOptionsItemSelected(item)
