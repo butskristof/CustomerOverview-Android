@@ -13,7 +13,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".activities.OrderActivity">
+        <activity android:name=".activities.OrderActivity"
+                android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.OverviewActivity">
             <intent-filter>

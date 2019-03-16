@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers
 
 const val CUSTOMER_INDEX: String = "CUSTOMER_INDEX"
 const val CUSTOMER_IMG_URL: String = "CUSTOMER_IMG_URL"
+const val CUSTOMER_NAME: String = "CUSTOMER_NAME"
 
 class OverviewActivity :
     AppCompatActivity(),

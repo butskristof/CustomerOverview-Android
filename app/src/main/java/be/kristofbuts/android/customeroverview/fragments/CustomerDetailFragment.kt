@@ -1,5 +1,6 @@
 package be.kristofbuts.android.customeroverview.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 
 import be.kristofbuts.android.customeroverview.R
-import be.kristofbuts.android.customeroverview.activities.CUSTOMER_IMG_URL
-import be.kristofbuts.android.customeroverview.activities.CUSTOMER_INDEX
-import be.kristofbuts.android.customeroverview.activities.ImageActivity
-import be.kristofbuts.android.customeroverview.activities.OrderActivity
+import be.kristofbuts.android.customeroverview.activities.*
 import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
 import be.kristofbuts.android.customeroverview.rest.RestClient
@@ -30,7 +28,7 @@ import java.text.SimpleDateFormat
  * A simple [Fragment] subclass.
  *
  */
-class CustomerDetailFragment : Fragment() {
+class CustomerDetailFragment() : Fragment() {
     // layout properties
     private lateinit var ivCustomer: ImageView
     private lateinit var tvID: TextView
@@ -88,6 +86,7 @@ class CustomerDetailFragment : Fragment() {
         this.btnOrders.setOnClickListener {
             val intent = Intent(context!!.applicationContext, OrderActivity::class.java).apply {
                 putExtra(CUSTOMER_INDEX, index)
+                putExtra(CUSTOMER_NAME, customer.getName())
             }
             startActivity(intent)
         }

@@ -4,7 +4,7 @@ import java.util.*
 
 class Order(
     val id: Int,
-    val date: Date,
+    val date: GregorianCalendar,
     val total: Double,
     val currency: String,
     val customerId: Int

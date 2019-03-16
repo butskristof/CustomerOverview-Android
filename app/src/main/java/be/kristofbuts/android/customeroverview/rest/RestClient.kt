@@ -132,6 +132,31 @@ class RestClient(
         return observable
     }
 
+    fun getOrdersForCustomer(customerId: Int): Observable<Array<Order>> {
+        val observable = Observable.create<Array<Order>> { emitter ->
+            try {
+                var connection = connect("${BASE_URL}/orders?customerId=${customerId}")
+
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
+                    .create()
+
+                val orders = gson
+                    .fromJson(InputStreamReader(
+                        connection.inputStream),
+                        Array<Order>::class.java
+                    )
+
+                emitter.onNext(orders)
+            } catch (e: IOException) {
+                Log.i("Exception", e.message)
+                emitter.onError(e)
+            }
+        }
+
+        return observable
+    }
+
     fun getCustomerImage(imgStr: String): Observable<Bitmap> {
         val observable = Observable.create<Bitmap> { emitter ->
             try {
