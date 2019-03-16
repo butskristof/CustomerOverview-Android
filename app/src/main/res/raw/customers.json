@@ -9,7 +9,7 @@
       "callsToServiceLine": 9,
       "registrationDate": "2015-05-15",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Michael"
+      "image": "michael.png"
     },
     {
       "id": 1,
@@ -20,7 +20,7 @@
       "callsToServiceLine": 18,
       "registrationDate": "2015-12-09",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Briggs"
+      "image": "briggs.png"
     },
     {
       "id": 2,
@@ -31,7 +31,7 @@
       "callsToServiceLine": 20,
       "registrationDate": "2015-04-01",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Gail"
+      "image": "gail.png"
     },
     {
       "id": 3,
@@ -42,7 +42,7 @@
       "callsToServiceLine": 6,
       "registrationDate": "2017-04-16",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Sandra"
+      "image": "sandra.png"
     },
     {
       "id": 4,
@@ -53,7 +53,7 @@
       "callsToServiceLine": 0,
       "registrationDate": "2017-12-03",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Osborne"
+      "image": "osborne.png"
     },
     {
       "id": 5,
@@ -64,7 +64,7 @@
       "callsToServiceLine": 20,
       "registrationDate": "2018-03-07",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Sellers"
+      "image": "sellers.png"
     },
     {
       "id": 6,
@@ -75,7 +75,7 @@
       "callsToServiceLine": 15,
       "registrationDate": "2016-07-03",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Vang"
+      "image": "vang.png"
     },
     {
       "id": 7,
@@ -86,7 +86,7 @@
       "callsToServiceLine": 8,
       "registrationDate": "2015-05-29",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Jessie"
+      "image": "jessie.png"
     },
     {
       "id": 8,
@@ -97,7 +97,7 @@
       "callsToServiceLine": 15,
       "registrationDate": "2014-01-21",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Cooley"
+      "image": "cooley.png"
     },
     {
       "id": 9,
@@ -108,7 +108,7 @@
       "callsToServiceLine": 7,
       "registrationDate": "2018-07-18",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Cunningham"
+      "image": "cunningham.png"
     },
     {
       "id": 10,
@@ -119,7 +119,7 @@
       "callsToServiceLine": 10,
       "registrationDate": "2017-12-29",
       "isActive": true,
-      "image": "https://via.placeholder.com/200x80.png?text=Cornelia"
+      "image": "cornelia.png"
     },
     {
       "id": 11,
@@ -130,7 +130,7 @@
       "callsToServiceLine": 7,
       "registrationDate": "2018-08-16",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Farrell"
+      "image": "farrell.png"
     },
     {
       "id": 12,
@@ -141,7 +141,7 @@
       "callsToServiceLine": 17,
       "registrationDate": "2014-07-15",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Carlene"
+      "image": "carlene.png"
     },
     {
       "id": 13,
@@ -152,7 +152,7 @@
       "callsToServiceLine": 19,
       "registrationDate": "2014-06-29",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Cherry"
+      "image": "cherry.png"
     },
     {
       "id": 14,
@@ -163,7 +163,7 @@
       "callsToServiceLine": 19,
       "registrationDate": "2015-11-18",
       "isActive": false,
-      "image": "https://via.placeholder.com/200x80.png?text=Baxter"
+      "image": "baxter.png"
     }
   ],
   "orders": [
