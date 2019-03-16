@@ -1,26 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                                                   android:layout_height="match_parent" android:id="@+id/divider">
 
-    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                                android:id="@+id/guideline" app:layout_constraintGuide_percent="0.45"
-                                                android:orientation="vertical"/>
-    <fragment
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:name="be.kristofbuts.android.customeroverview.fragments.CustomersFragment"
-            android:id="@+id/customerOverviewFragment"
+<!-- drawer layout must be root for activity -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                           xmlns:app="http://schemas.android.com/apk/res-auto"
+                                           xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+                                           android:layout_width="match_parent"
+                                           android:layout_height="match_parent"
+                                           android:fitsSystemWindows="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+           xmlns:android="http://schemas.android.com/apk/res/android"
+           xmlns:app="http://schemas.android.com/apk/res-auto"
+           xmlns:tools="http://schemas.android.com/tools"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           tools:context=".activities.OverviewActivity"
+           android:id="@+id/overview_layout_layout"
+>
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-    <fragment
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:name="be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment"
-            android:id="@+id/customerDetailFragment"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/customerOverviewFragment"/>
+            app:layout_constraintEnd_toEndOf="parent"
+    />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline"
+                app:layout_constraintGuide_percent="0.45"
+                android:orientation="vertical"/>
+        <fragment
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:name="be.kristofbuts.android.customeroverview.fragments.CustomersFragment"
+                android:id="@+id/customerOverviewFragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+        <fragment
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:name="be.kristofbuts.android.customeroverview.fragments.CustomerDetailFragment"
+                android:id="@+id/customerDetailFragment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/customerOverviewFragment"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/drawer_view"
+    >
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
