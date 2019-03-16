@@ -13,7 +13,7 @@
                                                    tools:context=".fragments.CustomerDetailFragment">
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="150dp" app:srcCompat="@drawable/michael"
+            android:layout_height="150dp" app:srcCompat="@drawable/defaultimg"
             android:id="@+id/imgCustomer"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:scaleType="fitCenter"

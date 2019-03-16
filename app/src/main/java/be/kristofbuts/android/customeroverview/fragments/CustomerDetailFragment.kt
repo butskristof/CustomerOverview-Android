@@ -10,14 +10,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 
 import be.kristofbuts.android.customeroverview.R
+import be.kristofbuts.android.customeroverview.activities.CUSTOMER_IMG_URL
 import be.kristofbuts.android.customeroverview.activities.CUSTOMER_INDEX
 import be.kristofbuts.android.customeroverview.activities.ImageActivity
 import be.kristofbuts.android.customeroverview.activities.OrderActivity
 import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.model.getCustomers
+import be.kristofbuts.android.customeroverview.rest.RestClient
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_customer_detail.view.*
 import java.text.SimpleDateFormat
 
@@ -39,12 +44,14 @@ class CustomerDetailFragment : Fragment() {
     private lateinit var btnOrders: Button
 
     // keep track of customer to show
+//    var customers: Array<Customer> = arrayOf()
+//        set(value) {
+//            field = value
+//            updateFields()
+//        }
+
     private var index: Int = 0
-    var customers: Array<Customer> = arrayOf()
-        set(value) {
-            field = value
-            updateFields()
-        }
+    private lateinit var customer: Customer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +84,8 @@ class CustomerDetailFragment : Fragment() {
         this.ivCustomer.setOnClickListener {
             val intent = Intent(context!!.applicationContext, ImageActivity::class.java).apply {
                 // pass in img ref
-                putExtra(CUSTOMER_INDEX, index)
+//                putExtra(CUSTOMER_INDEX, index)
+                putExtra(CUSTOMER_IMG_URL, customer.image)
             }
             startActivity(intent)
         }
@@ -91,9 +99,6 @@ class CustomerDetailFragment : Fragment() {
     }
 
     private fun updateFields() {
-        // get customer for easy reference below
-        val customer = customers[index]
-
         // check whether properties are initialised first!!
 
         if (this::ivCustomer.isInitialized) ivCustomer.setImageBitmap(customer.imageBitmap)
@@ -107,8 +112,25 @@ class CustomerDetailFragment : Fragment() {
     }
 
     // update customer to show and trigger update
-    fun setCustomerIndex(custIndex: Int) {
-        this.index = custIndex
-        this.updateFields()
+//    fun setCustomerIndex(custIndex: Int) {
+//        this.index = custIndex
+//        this.updateFields()
+//    }
+
+    fun loadCustomer() {
+        RestClient(context!!.applicationContext)
+            .getCustomer(index)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                customer = it
+                updateFields()
+            }, {
+                Toast.makeText(
+                    context!!.applicationContext,
+                    it.message,
+                    Toast.LENGTH_LONG)
+                    .show()
+            })
     }
 }

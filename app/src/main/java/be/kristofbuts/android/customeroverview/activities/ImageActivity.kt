@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import be.kristofbuts.android.customeroverview.R
-import be.kristofbuts.android.customeroverview.model.Customer
 import be.kristofbuts.android.customeroverview.rest.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.customer_list_item.*
 
 class ImageActivity : AppCompatActivity() {
 
     private lateinit var imgView: ImageView
-    private var index: Int = 0
-    var customers: Array<Customer> = arrayOf()
-        set(value) {
-            field = value
-            setImage()
-        }
+    private var imgUrlStr: String = ""
+    set(value) {
+        field = value
+        loadImage()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +27,9 @@ class ImageActivity : AppCompatActivity() {
         this.addEventHandlers()
 
         // when coming from overview, customer id is passed in, otherwise start at first element
-        index = intent.getIntExtra(CUSTOMER_INDEX, 0)
+        imgUrlStr = intent.getStringExtra(CUSTOMER_IMG_URL)
 
-        this.loadData()
+        this.loadImage()
     }
 
     private fun initialiseViews() {
@@ -41,13 +40,13 @@ class ImageActivity : AppCompatActivity() {
         // nothing to do here (yet)
     }
 
-    private fun loadData() {
+    private fun loadImage() {
         RestClient(this)
-            .getCustomers()
+            .getCustomerImage(imgUrlStr)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
-                customers = it
+                this.imgView.setImageBitmap(it)
             }, {
                 Toast.makeText(
                     this@ImageActivity,
@@ -55,9 +54,5 @@ class ImageActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG)
                     .show()
             })
-    }
-
-    private fun setImage() {
-        this.imgView.setImageBitmap(customers[index].imageBitmap)
     }
 }

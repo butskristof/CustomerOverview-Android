@@ -7,7 +7,7 @@
 
     <ImageView
             android:layout_width="100dp"
-            android:layout_height="100dp" app:srcCompat="@drawable/baxter"
+            android:layout_height="100dp" app:srcCompat="@drawable/defaultimg"
             android:id="@+id/ivCustomerPhoto" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:scaleType="fitCenter"/>

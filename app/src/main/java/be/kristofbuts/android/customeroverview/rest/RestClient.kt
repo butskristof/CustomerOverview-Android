@@ -1,6 +1,7 @@
 package be.kristofbuts.android.customeroverview.rest
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.util.Log
@@ -16,7 +17,7 @@ import java.util.*
 
 // define base url
 // TODO switch to emulator
-const val BASE_URL: String = "http://192.168.1.206:3000"
+const val BASE_URL: String = "http://172.16.119.39:3000"
 
 class RestClient(
     private val context: Context
@@ -77,6 +78,35 @@ class RestClient(
         return observable
     }
 
+    fun getCustomer(id: Int): Observable<Customer> {
+        val observable = Observable.create<Customer> {emitter ->
+            try {
+                var connection = connect("${BASE_URL}/customers/${id}")
+
+                val gson = GsonBuilder()
+                    .registerTypeAdapter(GregorianCalendar::class.java, GregorianCalendarDeserialiser()) // custom parsing from string to GregorianCalendar
+                    .create()
+
+                val customer = gson
+                    .fromJson(InputStreamReader(
+                        connection.inputStream),
+                        Customer::class.java
+                    )
+
+                // load pictures
+                connection = connect("${BASE_URL}/${customer.image}")
+                customer.imageBitmap = BitmapFactory.decodeStream(connection.inputStream)
+
+                emitter.onNext(customer)
+            } catch (e: IOException) {
+                Log.i("Exception", e.message)
+                emitter.onError(e)
+            }
+        }
+
+        return observable
+    }
+
     fun getOrders(): Observable<Array<Order>> {
         val observable = Observable.create<Array<Order>> { emitter ->
             try {
@@ -93,6 +123,22 @@ class RestClient(
                     )
 
                 emitter.onNext(orders)
+            } catch (e: IOException) {
+                Log.i("Exception", e.message)
+                emitter.onError(e)
+            }
+        }
+
+        return observable
+    }
+
+    fun getCustomerImage(imgStr: String): Observable<Bitmap> {
+        val observable = Observable.create<Bitmap> { emitter ->
+            try {
+                var connection = connect("${BASE_URL}/${imgStr}")
+                val imageBitmap = BitmapFactory.decodeStream(connection.inputStream)
+
+                emitter.onNext(imageBitmap)
             } catch (e: IOException) {
                 Log.i("Exception", e.message)
                 emitter.onError(e)
