@@ -17,7 +17,7 @@ import java.util.*
 
 // define base url
 // TODO switch to emulator
-const val BASE_URL: String = "http://172.16.119.39:3000"
+const val BASE_URL: String = "http://192.168.1.206:3000"
 
 class RestClient(
     private val context: Context

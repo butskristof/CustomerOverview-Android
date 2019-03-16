@@ -21,10 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private var index: Int = 0
     var customers: Array<Customer> = arrayOf()
-        set(value) {
-            field = value
-            customerDetailFragment.customers = value
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

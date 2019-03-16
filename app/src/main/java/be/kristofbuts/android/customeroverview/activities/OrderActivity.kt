@@ -16,6 +16,5 @@ class OrderActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-
     }
 }

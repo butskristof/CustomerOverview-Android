@@ -43,13 +43,6 @@ class CustomerDetailFragment : Fragment() {
 
     private lateinit var btnOrders: Button
 
-    // keep track of customer to show
-//    var customers: Array<Customer> = arrayOf()
-//        set(value) {
-//            field = value
-//            updateFields()
-//        }
-
     private var index: Int = 0
     private lateinit var customer: Customer
 
@@ -62,6 +55,8 @@ class CustomerDetailFragment : Fragment() {
 
         this.initialiseViews(view)
         this.addEventHandlers()
+
+        this.loadCustomer()
 
         return view
     }
@@ -112,10 +107,10 @@ class CustomerDetailFragment : Fragment() {
     }
 
     // update customer to show and trigger update
-//    fun setCustomerIndex(custIndex: Int) {
-//        this.index = custIndex
-//        this.updateFields()
-//    }
+    fun setCustomerIndex(custIndex: Int) {
+        this.index = custIndex
+        loadCustomer()
+    }
 
     fun loadCustomer() {
         RestClient(context!!.applicationContext)

@@ -23,14 +23,10 @@ const val CUSTOMER_IMG_URL: String = "CUSTOMER_IMG_URL"
 class OverviewActivity :
     AppCompatActivity(),
     CustomerAdapter.CustomerSelectionListener {
-    private var landscapeFragment: CustomerDetailFragment? = null
+    private lateinit var landscapeFragment: CustomerDetailFragment
 
     private lateinit var rvCustomers: RecyclerView
-    private var customers: Array<Customer> = arrayOf()
-        set(value) {
-            landscapeFragment?.customers = value
-            field = value
-        }
+//    private var customers: Array<Customer> = arrayOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +55,7 @@ class OverviewActivity :
             .subscribeOn(Schedulers.io())
             .subscribe({
                 (rvCustomers.adapter as CustomerAdapter).customers = it
-                customers = it
+//                customers = it
             }, {
                 Toast.makeText(
                     this@OverviewActivity,
@@ -105,7 +101,8 @@ class OverviewActivity :
             startActivity(intent)
         } else {
             // this triggers the update
-            this.landscapeFragment?.setCustomerIndex(pos)
+//            this.landscapeFragment?.setCustomerIndex(pos)
+            this.landscapeFragment.setCustomerIndex(pos)
         }
     }
 
