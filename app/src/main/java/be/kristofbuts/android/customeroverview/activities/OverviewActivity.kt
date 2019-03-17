@@ -44,8 +44,8 @@ class OverviewActivity :
     }
 
     private fun initialiseViews() {
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+//        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_menu)
@@ -78,6 +78,7 @@ class OverviewActivity :
 
             true
         }
+
     }
 
     // add menu in upper right
@@ -93,7 +94,11 @@ class OverviewActivity :
             startActivity(intent)
             return true
         } else if (item?.itemId == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START)
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawers()
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
             return true
         } else {
             return super.onOptionsItemSelected(item)

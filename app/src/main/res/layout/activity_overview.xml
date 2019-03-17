@@ -17,15 +17,6 @@
             tools:context=".activities.OverviewActivity"
             android:id="@+id/overview_portrait_layout"
     >
-        <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:id="@+id/toolbar"
-                style="@style/MyToolbar"
-                app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:elevation="4dp"/>
 
         <fragment
                 android:layout_width="0dp"
@@ -33,7 +24,7 @@
                 android:name="be.kristofbuts.android.customeroverview.fragments.CustomersFragment"
                 android:id="@+id/customersFragment" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
