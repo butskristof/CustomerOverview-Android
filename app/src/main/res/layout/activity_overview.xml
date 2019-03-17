@@ -21,11 +21,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/toolbar"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                style="@style/MyToolbar"
+                app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-        />
+                android:elevation="4dp"/>
 
         <fragment
                 android:layout_width="0dp"
