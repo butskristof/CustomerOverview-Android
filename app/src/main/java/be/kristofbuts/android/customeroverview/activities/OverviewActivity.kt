@@ -81,6 +81,8 @@ class OverviewActivity :
             if (menuItem.itemId == R.id.nav_random) {
                 val customerSize = (rvCustomers.adapter as CustomerAdapter).customers.size
                 onCustomerSelected(rnd.nextInt(customerSize))
+            } else if (menuItem.itemId == R.id.nav_data) {
+                startActivity(Intent(this, ChartActivity::class.java))
             }
 
             true

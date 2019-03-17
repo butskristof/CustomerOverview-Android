@@ -25,13 +25,17 @@
     <string name="about_kb_email">kristof.buts@student.kdg.be</string>
     <string name="about_kb_classgroup">INF201B</string>
 
+    <!-- chart -->
+    <string name="chart_description">Calls to service line per customer</string>
+
     <!-- customer detail -->
-    <string name="no_of_calls"> calls to service line</string>
+    <string name="no_of_calls">calls to service line</string>
     <string name="no_of_calls_example">5 calls to service line</string>
 
     <!-- menu -->
     <string name="nav_all">All customers</string>
     <string name="nav_random">Random customer</string>
+    <string name="nav_data">Data overview</string>
 
     <!-- main -->
     <string name="prev">Previous</string>
