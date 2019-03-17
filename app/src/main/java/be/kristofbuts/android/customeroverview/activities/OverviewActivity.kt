@@ -19,6 +19,7 @@ import be.kristofbuts.android.customeroverview.rest.RestClient
 import com.google.android.material.navigation.NavigationView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlin.random.Random
 
 /**
  * This is the new opening screen. It will contains a list of customers with their most vital information and a picture.
@@ -28,10 +29,12 @@ class OverviewActivity :
     CustomerAdapter.CustomerSelectionListener {
 
     private lateinit var landscapeFragment: CustomerDetailFragment // this doesn't get initialised if we're in portrait
-
     private lateinit var rvCustomers: RecyclerView
-
     private lateinit var drawerLayout: DrawerLayout
+
+    private companion object {
+        val rnd = Random.Default
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +78,10 @@ class OverviewActivity :
             drawerLayout.closeDrawers()
 
             // add code here
+            if (menuItem.itemId == R.id.nav_random) {
+                val customerSize = (rvCustomers.adapter as CustomerAdapter).customers.size
+                onCustomerSelected(rnd.nextInt(customerSize))
+            }
 
             true
         }
