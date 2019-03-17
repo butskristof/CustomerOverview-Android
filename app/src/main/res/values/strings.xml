@@ -16,7 +16,7 @@
 
     <!-- about -->
     <string name="about_title">About</string>
-    <string name="about_text">This Android application was created as a running project for the User Interface 2 course
+    <string name="about_text">This Android application was created as a running project for the User Interfaces 2 course
         at the Karel de Grote University College. It is used throughout the course to implement and exercise acquired
         skills. It will be continually expanded throughout the semester.
     </string>
